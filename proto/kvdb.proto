@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package kvdb;
+
+service KvService {
+  // Set a key-value pair
+  rpc Set(SetRequest) returns (SetResponse);
+  
+  // Get a value by key
+  rpc Get(GetRequest) returns (GetResponse);
+  
+  // Remove a key-value pair
+  rpc Remove(RemoveRequest) returns (RemoveResponse);
+}
+
+// Request message for Set
+message SetRequest {
+  int64 key = 1;
+  string value = 2;
+}
+
+// Response message for Set
+message SetResponse {
+  bool success = 1;
+  string old_value = 2;
+  string error = 3;
+}
+
+// Request message for Get
+message GetRequest {
+  int64 key = 1;
+}
+
+// Response message for Get
+message GetResponse {
+  bool exists = 1;
+  string value = 2;
+  string error = 3;
+}
+
+// Request message for Remove
+message RemoveRequest {
+  int64 key = 1;
+}
+
+// Response message for Remove
+message RemoveResponse {
+  bool success = 1;
+  string old_value = 2;
+  string error = 3;
+}
